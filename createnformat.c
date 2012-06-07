@@ -12,12 +12,13 @@ int main(int argc, char *argv[]) {
 		perror ( "syntax: createnformat volume_name volume_size\n"); 
 		exit(0);
 	}
-	
+		
 	char volume_name[16];
 	strcpy(volume_name, argv[1]);
 	int  volume_size = atoi(argv[2]);
+	mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 	
-	int disk = open(argv[1], O_CREAT | O_EXCL | O_WRONLY );
+	int disk = open(argv[1], O_CREAT | O_EXCL | O_WRONLY, mode);
 	if (disk < 0) {
 		perror("Can't open the disk\n");
 		exit(1);
@@ -44,14 +45,15 @@ int main(int argc, char *argv[]) {
 		.s_blocks_count = 10240,			/* Filesystem size in blocks */
 		.s_free_blocks_count = 8192,			/* Free blocks counter */
 		.s_free_inodes_count = 8192,			/* Free inodes counter */
-		.s_free_first_data_block = 1,			/* Number of first useful block */
+		.s_first_data_block = 1,			/* Number of first useful block */
 		.s_log_block_size = 0,				/* Block size: 0 being 1024 bytes */
 		.s_inode_size = sizeof(struct bfs_inode),	/* Size of on-disk inode structure */
 		.s_prealloc_blocks = 1,				/* Number of blocks to preallocate */
 		.s_prealloc_dir_blocks = 1			/* Number of blocks to preallocate for directories */
 	};
 
-	strcpy ( (void*)&(bfs_sb.s_uuid), "be2d14026c6246dfbb45215a002dd473" );	/* 128-bit filesystem identifier */
+	memcpy ( (void*)&(bfs_sb.s_uuid), "be2d14026c6246dfbb45215a002dd473",
+		strlen("be2d14026c6246dfbb45215a002dd473") );	/* 128-bit filesystem identifier */
 	strcpy ( bfs_sb.s_volume_name, volume_name );
 
 	pwrite (disk, &bfs_sb, 

@@ -40,7 +40,7 @@ struct bfs_group_desc {
 	uint16_t	bg_free_inodes_count;		/* Number of free inodes in the group */
 	uint16_t	bg_used_dirs_count;		/* Number of directories in the group */
 	uint16_t	bg_pad;				/* Alignment to word */
-	uint32_t	s_reserved[251];		/* Padding to the end of the block */	
+	uint32_t	bg_reserved[251];		/* Padding to the end of the block */	
 };
 
 /*

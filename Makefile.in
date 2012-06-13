@@ -32,7 +32,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = createnformat$(EXEEXT)
+bin_PROGRAMS = makefs$(EXEEXT)
 subdir = .
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(top_srcdir)/configure AUTHORS COPYING \
@@ -48,9 +48,9 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_createnformat_OBJECTS = createnformat.$(OBJEXT)
-createnformat_OBJECTS = $(am_createnformat_OBJECTS)
-createnformat_DEPENDENCIES =
+am_makefs_OBJECTS = makefs.$(OBJEXT)
+makefs_OBJECTS = $(am_makefs_OBJECTS)
+makefs_DEPENDENCIES =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -59,8 +59,8 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(createnformat_SOURCES)
-DIST_SOURCES = $(createnformat_SOURCES)
+SOURCES = $(makefs_SOURCES)
+DIST_SOURCES = $(makefs_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -161,8 +161,8 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CXXFLAGS = $(INTI_CFLAGS)
-createnformat_SOURCES = createnformat.c fs.h
-createnformat_LDADD = $(INTI_LIBS)
+makefs_SOURCES = makefs.c fs.h
+makefs_LDADD = $(INTI_LIBS)
 all: all-am
 
 .SUFFIXES:
@@ -238,9 +238,9 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
-createnformat$(EXEEXT): $(createnformat_OBJECTS) $(createnformat_DEPENDENCIES) 
-	@rm -f createnformat$(EXEEXT)
-	$(LINK) $(createnformat_OBJECTS) $(createnformat_LDADD) $(LIBS)
+makefs$(EXEEXT): $(makefs_OBJECTS) $(makefs_DEPENDENCIES) 
+	@rm -f makefs$(EXEEXT)
+	$(LINK) $(makefs_OBJECTS) $(makefs_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -248,7 +248,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/createnformat.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/makefs.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

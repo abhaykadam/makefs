@@ -61,11 +61,11 @@ struct bfs_inode {
 	uint16_t	i_padding_1;			/* Alignment to word */	
 	uint32_t	i_blocks;			/* Number of data blocks of the file */
 	uint32_t	i_block[BFS_N_BLOCKS];		/* Pointers to data blocks */
-	uint32_t	s_reserved[12];			/* Padding to make size of bfs_inode 128 */	
+	uint32_t	i_reserved[12];			/* Padding to make size of bfs_inode 128 */	
 };
 
 /*
- * Ext2 directory file types.  Only the low 3 bits are used.
+ * BFS directory file types.  Only the low 3 bits are used.
  */
 
 enum {
@@ -85,12 +85,13 @@ enum {
  */
 #define BFS_NAME_LEN 255
 
-struct bfs_dir_entry {
-	uint32_t	inode;			/* Inode number */
-	uint16_t	rec_len;		/* Directory entry length */
-	uint8_t		name_len;		
+struct bfs_dir_entry{
+	uint32_t	inode;				/* Inode number */
+	uint16_t	rec_len;			/* Directory entry length */
+	uint8_t		name_len;			/* Name length */
 	uint8_t		file_type;
-	char		name[BFS_NAME_LEN];	
+	char		name[];		/* File name */
 };
+
 
 #endif

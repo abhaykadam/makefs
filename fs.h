@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#define BLOCK_SIZE			1024
+
 #define BFS_NDIR_BLOCKS                12
 #define BFS_N_BLOCKS                   (BFS_NDIR_BLOCKS)
 
